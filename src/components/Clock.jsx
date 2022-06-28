@@ -1,31 +1,7 @@
-import React, { Component,useState,useEffect } from 'react'
+import React, {useState,useEffect } from 'react'
 
 
   
-      
-      
-//    componentDidMount(){
-//       this.timerID = setInterval (
-//          () => this.tick(), 1000
-//       );
-//    }
-//    componentWillUnmount() {
-//       clearInterval (this.timerID);
-//    }
-
-//    tick(){
-//       this.setState((prevState) => {
-//          let edad = prevState.edad +1;
-//          return {
-//             ...prevState,
-//             fecha: new Date(),
-//             edad
-//          }
-//       });
-//    }
-
-
-
 
 
 
@@ -33,33 +9,35 @@ export const ClockFunction = (props) => {
 
     props={
 
-    edad: 15,
+    edad: 0,
     nombre: 'Martín',
     apellidos: 'San José'
   
     }
-    
 
-
-  useEffect(()=>{
-  
-   const timer=setInterval(()=>{
+    const [edadSec, setEdadSec] = useState(0);
     
-       let edadSec=props.edad++; 
-      
-    },1000)
-    return () => {
-        clearInterval(timer)
-    };
-  })
- 
-  
+    const createTimer = () => {
+    const timer=setInterval(()=>{
+        
+           setEdadSec(props.edad++); 
+          
+        },1000)
+        return () => {
+            clearInterval(timer)
+        };
+    }
+    useEffect(()=>{
+     
+          createTimer();
+    },[])
     return (
         <div>
               
-            <h1>edad: {props.edad}</h1>
-            <h1>{props.nombre}</h1>
+        
+            <h1>Hola,{props.nombre}</h1>
             <h1>{props.apellidos}</h1>
+            <h1>edad: {edadSec}</h1>
            
            
    
